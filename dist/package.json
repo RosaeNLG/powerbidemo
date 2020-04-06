@@ -1,0 +1,17 @@
+{
+    "version": "1.0.0",
+    "author": {"name":"Ludan Stoecklé","email":"ludan.stoeckle@rosaenlg.org"},
+    "resources": [
+        {
+            "resourceId": "rId0",
+            "sourceType": 5,
+            "file": "resources/pbiagrisub9B8CC52EE48047C4B050774FDAB2AE8D.pbiviz.json"
+        }
+    ],
+    "visual": {"name":"pbiagrisub","displayName":"AgriSub","guid":"pbiagrisub9B8CC52EE48047C4B050774FDAB2AE8D","visualClassName":"Visual","version":"1.0.0","description":"Power BI RosaeNLG POC based on Agrisub","supportUrl":"https://rosaenlg.org","gitHubUrl":"https://gitlab.com/ludan/pbiagrisub"},
+    "metadata": {
+        "pbivizjson": {
+            "resourceId": "rId0"
+        }
+    }  
+}

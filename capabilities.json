@@ -1,0 +1,35 @@
+{
+    "dataRoles": [
+        {
+            "displayName": "sales total qty",
+            "name": "salesQty",
+            "kind": "Measure"
+        },
+        {
+            "displayName": "sales total amount",
+            "name": "salesAmount",
+            "kind": "Measure"
+        }
+    ],
+    "dataViewMappings": [
+        {
+            "categorical": {
+                "values": {
+                    "select": [
+                        {
+                            "bind": {
+                                "to": "salesQty"
+                            }
+                        },
+                        {
+                            "bind": {
+                                "to": "salesAmount"
+                            }
+                        }
+                    ]
+                }
+            }
+        }
+    ],
+    "suppressDefaultTitle": true
+}

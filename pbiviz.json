@@ -1,0 +1,27 @@
+{
+    "visual": {
+        "name": "powerbidemo",
+        "displayName": "Power BI RosaeNLG demo",
+        "guid": "powerbidemo9B8CC52EE48047C4B050774FDAB2AE8D",
+        "visualClassName": "Visual",
+        "version": "1.0.0",
+        "description": "Power BI RosaeNLG demo for US_Sales_Analysis",
+        "supportUrl": "https://rosaenlg.org",
+        "gitHubUrl": "https://gitlab.com/rosaenlg-projects/powerbidemo.git"
+    },
+    "apiVersion": "2.6.0",
+    "author": {
+        "name": "Ludan Stoecklé",
+        "email": "ludan.stoeckle@rosaenlg.org"
+    },
+    "assets": {
+        "icon": "assets/icon.png"
+    },
+    "externalJS": [
+        "node_modules/rosaenlg/dist/rollup/rosaenlg_tiny_en_US_1.14.0.js"
+    ],
+    "style": "style/visual.less",
+    "capabilities": "capabilities.json",
+    "dependencies": null,
+    "stringResources": []
+}
