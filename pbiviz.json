@@ -7,7 +7,7 @@
         "version": "1.0.0",
         "description": "Power BI RosaeNLG demo for US_Sales_Analysis",
         "supportUrl": "https://rosaenlg.org",
-        "gitHubUrl": "https://gitlab.com/rosaenlg-projects/powerbidemo.git"
+        "gitHubUrl": "https://github.com/RosaeNLG/powerbidemo"
     },
     "apiVersion": "2.6.0",
     "author": {

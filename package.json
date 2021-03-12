@@ -1,5 +1,6 @@
 {
   "name": "visual",
+  "private": true,
   "scripts": {
     "pbiviz": "pbiviz",
     "start": "pbiviz start",
@@ -10,10 +11,10 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://gitlab.com/rosaenlg-projects/powerbidemo.git"
+    "url": "https://github.com/RosaeNLG/powerbidemo"
   },
   "bugs": {
-    "url": "https://gitlab.com/rosaenlg-projects/powerbidemo/-/issues"
+    "url": "https://github.com/RosaeNLG/powerbidemo/issues"
   },
   "homepage": "https://rosaenlg.org",
   "dependencies": {
