@@ -1,7 +1,7 @@
 /*
-*  Power BI Visual CLI
+*  Power BI Visual CLI, adapted for RosaeNLG Power BI plugin
 *
-*  Copyright (c) Microsoft Corporation
+*  Copyright 2020, Ludan Stoecklé <ludan.stoeckle@rosaenlg.org>, (c) Microsoft Corporation
 *  All rights reserved.
 *  MIT License
 *
