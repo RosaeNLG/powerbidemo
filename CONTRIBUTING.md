@@ -23,7 +23,7 @@ Development:
 - lint your code following current configuration
 - if the code corrects vulnerabilities: CVE IDs must be indicated in the commit message and in the `CHANGELOG.md`
 - each commit **MUST** contain a sign off message (see below)
-- new code must be under MIT license, new documentation under Creative Commons Attribution 4.0 International, unless specific exceptions (see below)
+- new code must be under Apache-2.0 license, new documentation under Creative Commons Attribution 4.0 International
 - update `CHANGELOG.md` (leave `== [Unreleased]`)
 - push your branch and create a PR
 - once accepted, code gets merged in master
