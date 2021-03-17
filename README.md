@@ -2,11 +2,13 @@
 Copyright 2021 Ludan Stoecklé
 SPDX-License-Identifier: CC-BY-4.0
 -->
-# Power BI custom visual demo using RosaeNLG
+# Power BI RosaeNLG plugin
 
 This repo contains a Power BI custom visual to add RosaeNLG ability to Power BI dashboards. It is useful if you wish to generate texts using NLG (Natural Language Generation) in your PowerBI dashboards.
 
-Current status is **Proof Of Concept**: we show that is works. Uou should not see the current implementation as an off-the-shelf plugin but rather as a starting point for your own plugin, which will contain your custom RosaeNLG templates. 
+Current status is **Proof Of Concept**: we show that is works. You should not see the current implementation as an off-the-shelf plugin but rather as a starting point for your own plugin, which will contain your custom RosaeNLG templates. 
+
+The Power BI RosaeNLG plugin project uses the Apache-2.0 license. It is based on the CircleCard sample code, which is licensed under the MIT license. A copy of each license can be found in the LICENSE file.
 
 Also check:
 - [Generate textual narratives in Power BI using RosaeNLG](https://medium.com/@ludan.stoeckle/generate-textual-narratives-in-power-bi-using-rosaenlg-48f81c53db39) on Medium

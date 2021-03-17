@@ -1,5 +1,5 @@
 {
-  "name": "visual",
+  "name": "power_bi_rosaenlg_plugin",
   "private": true,
   "scripts": {
     "pbiviz": "pbiviz",
@@ -8,7 +8,7 @@
     "lint": "tslint -c tslint.json -p tsconfig.json"
   },
   "author": "Ludan Stoecklé <ludan.stoeckle@rosaenlg.org>",
-  "license": "MIT",
+  "license": "(Apache-2.0 AND MIT)",
   "repository": {
     "type": "git",
     "url": "https://github.com/RosaeNLG/powerbidemo"

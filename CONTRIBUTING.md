@@ -48,8 +48,7 @@ Add `-s` flag to add it automatically: `git commit -s -m 'This is my commit mess
 
 ## License
 
-RosaeNLG Power BI plugin is released under MIT license.
-**New code must be release under MIT.**
+The Power BI RosaeNLG plugin project uses the Apache-2.0 license. It is based on the CircleCard sample code, which is licensed under the MIT license. A copy of each license can be found in the LICENSE file. **New code must be release under Apache 2.0.**
 
 Documentation is under [Creative Commons Attribution 4.0 International](https://spdx.org/licenses/CC-BY-4.0.html).
 
@@ -61,12 +60,12 @@ Each file of code **must** contain, in a comment at the top:
 - an SPDX short-form identifier
 - the copyright (new or updated)
 
-For a new file of code:
+For a new file of code, which will be under Apache-2.0 license:
 ```
 /**
  * @license
  * Copyright 2020, Random J Developer at Random Corp.
- * SPDX-License-Identifier: MIT
+ * SPDX-License-Identifier: Apache-2.0
  */
 
 ```
@@ -76,7 +75,7 @@ For an existing file, just complete the copyright (put yourself first):
 /**
  * @license
  * Copyright 2020, Random J Developer at Random Corp., 2019 Ludan Stoecklé, 2018 Other Contributor, etc.
- * SPDX-License-Identifier: MIT
+ * SPDX-License-Identifier: ~~~ LEAVE WHATEVER IS ALREADY PRESENT ~~~
  */
 
 ```
@@ -86,7 +85,7 @@ Note that TypeScript code, in addition to an @license tag, **requires an empty l
 /**
  * @license
  * Copyright ...
- * SPDX-License-Identifier: MIT
+ * SPDX-License-Identifier: ...
  */
 
 // Note the empty line above.

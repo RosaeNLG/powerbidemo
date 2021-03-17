@@ -26,4 +26,5 @@ SPDX-License-Identifier: CC-BY-4.0
 ### Changed
 
 - README
+- clear licenses between MIT and Apache-2.0
 
