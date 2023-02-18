@@ -5,10 +5,10 @@
         {
             "resourceId": "rId0",
             "sourceType": 5,
-            "file": "resources/pbiagrisub9B8CC52EE48047C4B050774FDAB2AE8D.pbiviz.json"
+            "file": "resources/powerbidemo9B8CC52EE48047C4B050774FDAB2AE8D.pbiviz.json"
         }
     ],
-    "visual": {"name":"pbiagrisub","displayName":"AgriSub","guid":"pbiagrisub9B8CC52EE48047C4B050774FDAB2AE8D","visualClassName":"Visual","version":"1.0.0","description":"Power BI RosaeNLG POC based on Agrisub","supportUrl":"https://rosaenlg.org","gitHubUrl":"https://gitlab.com/ludan/pbiagrisub"},
+    "visual": {"name":"powerbidemo","displayName":"Power BI RosaeNLG demo","guid":"powerbidemo9B8CC52EE48047C4B050774FDAB2AE8D","visualClassName":"Visual","version":"1.0.0","description":"Power BI RosaeNLG demo for US_Sales_Analysis","supportUrl":"https://rosaenlg.org","gitHubUrl":"https://github.com/RosaeNLG/powerbidemo"},
     "metadata": {
         "pbivizjson": {
             "resourceId": "rId0"
