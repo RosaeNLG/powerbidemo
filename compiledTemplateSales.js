@@ -2,8 +2,32 @@ function pug_escape(e){var a=""+e,t=pug_match_html.exec(a);if(!t)return e;var r,
 var pug_match_html=/["&<>]/;function template(locals) {const embeddedLinguisticResources = {"verbs":{},"words":{},"adjectives":{}};var pug_html = "", protect_stack = [], pug_mixins = {}, pug_interp;;
     var locals_for_with = (locals || {});
     
-    (function (JSON, Object, console, data, embeddedLinguisticResources, params, util) {
-      function setRefGender(obj, gender) {
+    (function (JSON, Object, console, data, embeddedLinguisticResources, params, synHelper1, util) {
+      /**
+ * @license
+ * Copyright 2021 Ludan Stoecklé
+ * SPDX-License-Identifier: Apache-2.0
+ */
+//-------- allows core to communicate with the inner of the template mechanic already used by Pug (i.e. pug_html)
+util.setSpy({
+  getPugHtml: function () {
+    return pug_html;
+  },
+  setPugHtml: function (new_pug_html) {
+    pug_html = new_pug_html;
+  },
+  appendPugHtml: function (append) {
+    pug_html = pug_html + append;
+  },
+});
+util.setEmbeddedLinguisticResources(embeddedLinguisticResources);
+/**
+ * @license
+ * Copyright 2021 Ludan Stoecklé
+ * SPDX-License-Identifier: Apache-2.0
+ */
+//-------- using GenderNumberManager
+function setRefGender(obj, gender) {
   util.genderNumberManager.setRefGender(obj, gender, null);
 }
 function getRefGender(obj) {
@@ -33,6 +57,7 @@ function getAnonFS() {
 function getAnonFP() {
   return util.genderNumberManager.getAnonFP();
 }
+//-------- using RefsManager
 function resetRep(obj) {
   util.refsManager.resetRep(obj);
 }
@@ -48,11 +73,15 @@ function dumpRefMap() {
 function getNextRep(obj, params) {
   return util.refsManager.getNextRep(obj, params);
 }
+//-------- using SaidManager
 function dumpHasSaid() {
   util.saidManager.dumpHasSaid();
 }
 function getDumpHasSaid() {
   return util.saidManager.getDumpHasSaid();
+}
+function getHasSaidCopy() {
+  return util.saidManager.getHasSaidCopy();
 }
 function recordSaid(key) {
   util.saidManager.recordSaid(key);
@@ -72,6 +101,7 @@ function deleteValue(key) {
 function getValue(key) {
   return util.getSaidManager().getValue(key);
 }
+//-------- using helper
 function hasFlag(params, flag) {
   return util.helper.hasFlag(params, flag);
 }
@@ -81,11 +111,6 @@ function getFlagValue(params, flag) {
 function protectString(string) {
   return util.helper.protectString(string);
 }
-pug_mixins["uppercaseWords"] = pug_interp = function(str){
-var block = (this && this.block), attributes = (this && this.attributes) || {};
-function addToParams(_toAdd) { return Object.assign({}, params, _toAdd); }
-pug_html = pug_html + "¤" + (pug_escape(null == (pug_interp = util.helper.getUppercaseWords(str)) ? "" : pug_interp)) + "¤";
-};
 function isSentenceStart() {
   return util.helper.isSentenceStart();
 }
@@ -98,70 +123,109 @@ function getMFN(table, obj) {
 function getSorP(table, obj) {
   return util.helper.getSorP(table, obj);
 }
-let spy = {
-  getPugHtml: function() {
-    return pug_html;
-  },
-  getPugMixins: function() {
-    return pug_mixins;
-  },
-  setPugHtml: function(new_pug_html) {
-    pug_html = new_pug_html;
-  },
-  appendPugHtml: function(append) {
-    pug_html = pug_html + append;
-  },
-  appendDoubleSpace: function() {
-    pug_html = pug_html + "  ";
-  },
-  getEmbeddedLinguisticResources: function() {
-    return embeddedLinguisticResources;
-  },
-  
-  // we should avoid this one as util. is already available
-  isEvaluatingEmpty: function() {
-    return util.saveRollbackManager.isEvaluatingEmpty;
-  },
-  
-  isEvaluatingChoosebest: function() {
-    return util.saveRollbackManager.isEvaluatingChoosebest;
-  }
+//-------- using DictManager
+function setWordData(word, wordData) {
+  util.languageImpl.getDictManager().setWordData(word, wordData);
 }
-pug_mixins["dummy"] = pug_interp = function(){
-var block = (this && this.block), attributes = (this && this.attributes) || {};
-function addToParams(_toAdd) { return Object.assign({}, params, _toAdd); }
-pug_mixins['dummy']();
-};
-pug_mixins["insertVal"] = pug_interp = function(val){
-var block = (this && this.block), attributes = (this && this.attributes) || {};
-function addToParams(_toAdd) { return Object.assign({}, params, _toAdd); }
-pug_html = pug_html + "¤" + (pug_escape(null == (pug_interp = val) ? "" : pug_interp)) + "¤";
-};
-pug_mixins["insertValUnescaped"] = pug_interp = function(val){
-var block = (this && this.block), attributes = (this && this.attributes) || {};
-function addToParams(_toAdd) { return Object.assign({}, params, _toAdd); }
-pug_html = pug_html + "¤" + (null == (pug_interp = val) ? "" : pug_interp) + "¤";
-};
+function setAdjData(word, wordData) {
+  util.languageImpl.getDictManager().setAdjData(word, wordData);
+}
+/**
+ * @license
+ * Copyright 2021 Ludan Stoecklé
+ * SPDX-License-Identifier: Apache-2.0
+ */
+function syn_fct(items) {
+  return util.synManager.synFct(items);
+}
 function printObj(before, obj) {
-  console.log(before + ' ' + JSON.stringify(obj).substring(0, 20) );
+  console.log(before + ' ' + JSON.stringify(obj).substring(0, 20));
 }
-pug_mixins["flushBuffer"] = pug_interp = function(){
-var block = (this && this.block), attributes = (this && this.attributes) || {};
-function addToParams(_toAdd) { return Object.assign({}, params, _toAdd); }
-pug_html = pug_html + "¤¤";
-};
-pug_mixins["eatSpace"] = pug_interp = function(){
-var block = (this && this.block), attributes = (this && this.attributes) || {};
-function addToParams(_toAdd) { return Object.assign({}, params, _toAdd); }
-pug_html = pug_html + "¤EATSPACE¤";
-};
 function logParams(params) {
   console.log('params: ' + JSON.stringify(params));
 }
 function valueToSorP(val) {
-  return val > 1 ? 'P' : 'S';
+  return util.languageImpl.isPlural(val) ? 'P' : 'S';
 }
-pug_mixins["toHtmlList"] = pug_interp = function(obj){
+function debug(filename, line) {
+  if (filename !== null) {
+    pug_debug_filename = filename;
+  }
+  pug_debug_line = line;
+  if (locals.renderDebug) {
+    // locals is available
+    let id = line;
+    if (filename !== null) {
+      id = filename.replace(/"/g, '') + ': ' + id;
+    }
+    pug_html = pug_html + `<span class="rosaenlg-debug" id="${id}"></span>`;
+  }
+}
+pug_mixins["foreach"] = pug_interp = function(elts, mixinFct, asm, params){ // NAME_foreach
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+function addToParams(_toAdd) { return Object.assign({}, params, _toAdd); }
+util.asmManager.foreach(elts, mixinFct, asm, params);
+};
+var foreach=pug_mixins["foreach"];
+pug_mixins["value"] = pug_interp = function(obj, params){ // NAME_value
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+function addToParams(_toAdd) { return Object.assign({}, params, _toAdd); }
+util.valueManager.value(obj, params);
+};
+var value=pug_mixins["value"];
+pug_mixins["syn"] = pug_interp = function(){ // NAME_syn
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+var items = [];
+for (pug_interp = 0; pug_interp < arguments.length; pug_interp++) {
+  items.push(arguments[pug_interp]);
+}
+function addToParams(_toAdd) { return Object.assign({}, params, _toAdd); }
+util.synManager.simpleSyn(items);
+};
+var syn=pug_mixins["syn"];
+pug_mixins["agreeAdj"] = pug_interp = function(adjective, subject, params){ // NAME_agreeAdj
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+function addToParams(_toAdd) { return Object.assign({}, params, _toAdd); }
+util.adjectiveManager.agreeAdj(adjective, subject, params);
+};
+var agreeAdj=pug_mixins["agreeAdj"];
+pug_mixins["recipientPossession"] = pug_interp = function(owned){ // NAME_recipientPossession
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+function addToParams(_toAdd) { return Object.assign({}, params, _toAdd); }
+util.possessiveManager.recipientPossession(owned);
+};
+var recipientPossession=pug_mixins["recipientPossession"];
+pug_mixins["thirdPossession"] = pug_interp = function(owner, owned, params){ // NAME_thirdPossession
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+function addToParams(_toAdd) { return Object.assign({}, params, _toAdd); }
+util.possessiveManager.thirdPossession(owner, owned, params);
+};
+var thirdPossession=pug_mixins["thirdPossession"];
+pug_mixins["dummy"] = pug_interp = function(){ // NAME_dummy
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+function addToParams(_toAdd) { return Object.assign({}, params, _toAdd); }
+pug_mixins['dummy']();
+};
+var dummy=pug_mixins["dummy"];
+pug_mixins["flushBuffer"] = pug_interp = function(){ // NAME_flushBuffer
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+function addToParams(_toAdd) { return Object.assign({}, params, _toAdd); }
+pug_html = pug_html + "¤¤";
+};
+var flushBuffer=pug_mixins["flushBuffer"];
+pug_mixins["eatSpace"] = pug_interp = function(){ // NAME_eatSpace
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+function addToParams(_toAdd) { return Object.assign({}, params, _toAdd); }
+pug_html = pug_html + "¤EATSPACE¤";
+};
+var eatSpace=pug_mixins["eatSpace"];
+pug_mixins["uppercaseWords"] = pug_interp = function(str){ // NAME_uppercaseWords
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+function addToParams(_toAdd) { return Object.assign({}, params, _toAdd); }
+pug_html = pug_html + "¤" + (pug_escape(null == (pug_interp = util.helper.getUppercaseWords(str)) ? "" : pug_interp)) + "¤";
+};
+var uppercaseWords=pug_mixins["uppercaseWords"];
+pug_mixins["toHtmlList"] = pug_interp = function(obj){ // NAME_toHtmlList
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 function addToParams(_toAdd) { return Object.assign({}, params, _toAdd); }
 pug_html = pug_html + "\u003Cul\u003E";
@@ -198,92 +262,38 @@ pug_html = pug_html + "\u003Cli\u003E" + "¤" + (pug_escape(null == (pug_interp 
 }).call(this);
 pug_html = pug_html + "\u003C\u002Ful\u003E";
 };
-pug_mixins["foreach"] = pug_interp = function(elts, mixinFct, asm, params){
+var toHtmlList=pug_mixins["toHtmlList"];
+pug_mixins["verb"] = pug_interp = function(subject, verbInfo, params){ // NAME_verb
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 function addToParams(_toAdd) { return Object.assign({}, params, _toAdd); }
-pug_html = pug_html + "¤¤¤";
-util.asmManager.foreach(elts, mixinFct, asm, params);
-pug_html = pug_html + "¤¤¤";
+util.sentenceManager.verb(subject, verbInfo, params);
 };
-pug_mixins["value"] = pug_interp = function(obj, params){
+var verb=pug_mixins["verb"];
+pug_mixins["subjectVerb"] = pug_interp = function(subject, verbInfo, params){ // NAME_subjectVerb
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 function addToParams(_toAdd) { return Object.assign({}, params, _toAdd); }
-pug_html = pug_html + "¤¤¤";
-util.valueManager.value(obj, params);
-pug_html = pug_html + "¤¤¤";
+util.sentenceManager.subjectVerb(subject, verbInfo, params);
 };
-pug_mixins["syn"] = pug_interp = function(){
-var block = (this && this.block), attributes = (this && this.attributes) || {};
-var items = [];
-for (pug_interp = 0; pug_interp < arguments.length; pug_interp++) {
-  items.push(arguments[pug_interp]);
-}
-function addToParams(_toAdd) { return Object.assign({}, params, _toAdd); }
-pug_html = pug_html + "¤¤¤";
-util.synManager.simpleSyn(items);
-pug_html = pug_html + "¤¤¤";
-};
-function syn_fct(items) {
-  return util.synManager.synFct(items);
-}
-pug_mixins["agreeAdj"] = pug_interp = function(adjective, subject, params){
+var subjectVerb=pug_mixins["subjectVerb"];
+pug_mixins["subjectVerbAdj"] = pug_interp = function(subject, verbInfo, adjective, params){ // NAME_subjectVerbAdj
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 function addToParams(_toAdd) { return Object.assign({}, params, _toAdd); }
-pug_html = pug_html + "¤¤¤";
-util.adjectiveManager.agreeAdj(adjective, subject, params);
-pug_html = pug_html + "¤¤¤";
+util.sentenceManager.subjectVerbAdj(subject, verbInfo, adjective, params);
 };
-pug_mixins["substantive"] = pug_interp = function(subst, subject){
+var subjectVerbAdj=pug_mixins["subjectVerbAdj"];
+pug_mixins["verbPart"] = pug_interp = function(){ // NAME_verbPart
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 function addToParams(_toAdd) { return Object.assign({}, params, _toAdd); }
-pug_html = pug_html + "¤¤¤" + "¤" + (pug_escape(null == (pug_interp = util.substantiveManager.getSubstantive(subst, subject, null)) ? "" : pug_interp)) + "¤" + "¤¤¤";
+util.verbsManager.popVerbPartInBuffer()
 };
-pug_mixins["recipientPossession"] = pug_interp = function(owned){
-var block = (this && this.block), attributes = (this && this.attributes) || {};
-function addToParams(_toAdd) { return Object.assign({}, params, _toAdd); }
-pug_html = pug_html + "¤¤¤";
-util.possessiveManager.recipientPossession(owned);
-pug_html = pug_html + "¤¤¤";
-};
-pug_mixins["thirdPossession"] = pug_interp = function(owner, owned, params){
-var block = (this && this.block), attributes = (this && this.attributes) || {};
-function addToParams(_toAdd) { return Object.assign({}, params, _toAdd); }
-pug_html = pug_html + "¤¤¤";
-util.possessiveManager.thirdPossession(owner, owned, params);
-pug_html = pug_html + "¤¤¤";
-};
-pug_mixins["subjectVerb"] = pug_interp = function(subject, verbInfo, params){
-var block = (this && this.block), attributes = (this && this.attributes) || {};
-function addToParams(_toAdd) { return Object.assign({}, params, _toAdd); }
-pug_html = pug_html + "¤¤¤";
-util.nominalGroupManager.subjectVerb(subject, verbInfo, params);
-pug_html = pug_html + "¤¤¤";
-};
-pug_mixins["subjectVerbAdj"] = pug_interp = function(subject, verbInfo, adjective, params){
-var block = (this && this.block), attributes = (this && this.attributes) || {};
-function addToParams(_toAdd) { return Object.assign({}, params, _toAdd); }
-pug_html = pug_html + "¤¤¤";
-util.nominalGroupManager.subjectVerbAdj(subject, verbInfo, adjective, params);
-pug_html = pug_html + "¤¤¤";
-};
-pug_mixins["verb"] = pug_interp = function(subject, verbInfo){
-var block = (this && this.block), attributes = (this && this.attributes) || {};
-function addToParams(_toAdd) { return Object.assign({}, params, _toAdd); }
-pug_html = pug_html + "¤¤¤" + "¤" + (pug_escape(null == (pug_interp = util.verbsManager.getAgreeVerb(subject, verbInfo)) ? "" : pug_interp)) + "¤" + "¤¤¤";
-};
-pug_mixins["verbPart"] = pug_interp = function(){
-var block = (this && this.block), attributes = (this && this.attributes) || {};
-function addToParams(_toAdd) { return Object.assign({}, params, _toAdd); }
-pug_html = pug_html + "¤¤¤" + "¤" + (pug_escape(null == (pug_interp = util.verbsManager.popVerbPart()) ? "" : pug_interp)) + "¤" + "¤¤¤";
-};
-util.setSpy(spy);
+var verbPart=pug_mixins["verbPart"];
 // default value if not provided in the parameters
 data = data || {
   salesQty: 1000,
   salesAmount: 500000,
 }
 
-pug_mixins['synHelper1'] = pug_interp = function synHelper1(pos) {
+pug_mixins['synHelper1'] = pug_interp = function(pos){
   switch(pos){
 case 1:
 pug_html = pug_html + "¤¤";
@@ -301,7 +311,8 @@ pug_html = pug_html + "¤ items¤";
   break;
   }
 };
-util.synManager.runSynz('synHelper1', 2, Object.assign({}, undefined, {}));
+var synHelper1=pug_mixins["synHelper1"];
+util.synManager.runSynz(synHelper1, 'synHelper1', 2, Object.assign({}, undefined, {}));
 pug_html = pug_html + "¤.¤";
     }.call(this, "JSON" in locals_for_with ?
         locals_for_with.JSON :
@@ -315,9 +326,10 @@ pug_html = pug_html + "¤.¤";
         locals_for_with.embeddedLinguisticResources :
         typeof embeddedLinguisticResources !== 'undefined' ? embeddedLinguisticResources : undefined, "params" in locals_for_with ?
         locals_for_with.params :
-        typeof params !== 'undefined' ? params : undefined, "util" in locals_for_with ?
+        typeof params !== 'undefined' ? params : undefined, "synHelper1" in locals_for_with ?
+        locals_for_with.synHelper1 :
+        typeof synHelper1 !== 'undefined' ? synHelper1 : undefined, "util" in locals_for_with ?
         locals_for_with.util :
         typeof util !== 'undefined' ? util : undefined));
-    ;;return locals.util.filterAll(pug_html);}
-    export default template;
-    
+    ;;return locals.util.getFiltered();}
+export default template;

@@ -14,7 +14,7 @@ import VisualUpdateOptions = powerbi.extensibility.visual.VisualUpdateOptions;
 import IVisual = powerbi.extensibility.visual.IVisual;
 import DataView = powerbi.DataView;
 
-import rosaenlg from '../node_modules/rosaenlg/dist/rollup/rosaenlg_tiny_en_US_1.14.0.js';
+import rosaenlg from '../node_modules/rosaenlg/dist/rollup/rosaenlg_tiny_en_US_3.3.1.js';
 import template from '../compiledTemplateSales.js';
 
 export class Visual implements IVisual {

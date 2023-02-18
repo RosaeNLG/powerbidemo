@@ -15,13 +15,19 @@ SPDX-License-Identifier: CC-BY-4.0
 
 -->
 
-## [Unreleased]
+## 1.1.0
+
+### Fixed
+
+- updated to work with recent versions of Power BI
+- updated to work with a recent version of RosaeNLG
+
+
+## 1.0.0
 
 ### Added
 
 - CHANGELOG, CODE_OF_CONDUCT, COMMUNITY, CONTRIBUTING, GOVERNANCE, RELEASE, SECURITY, SUPPORT
-
-### Fixed
 
 ### Changed
 
